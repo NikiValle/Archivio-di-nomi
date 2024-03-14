@@ -36,6 +36,9 @@ public class ArchivioNomi {
                             break;
                         }
                     }
+                    break;
+                case 3:
+                    
             }
         } while (scelta != 0);
     }
