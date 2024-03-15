@@ -38,13 +38,25 @@ public class ArchivioNomi {
                     Duplicati(strings, conta);
                     break;
                 case 5:
-
+                    Modifica(strings, conta, in);
+                    break;
+                case 6:
+                    Visualizza(strings, conta);
+                    break;
+                case 7:
+                    Lungo(strings, conta);
+                    Corto(strings, conta);
+                    break;
+                case 8:
+                    CancellaTutto(strings, conta, in);
+                    break;
             }
         } while (scelta != 0);
     }
     private static void Aggiunta (String [] a, int conta, Scanner in){
         System.out.println("Inserisci il nome");
         a[conta] = in.next();
+        conta = conta+1;
     }
     private static void Cancella (String [] a, int conta){
         for (int i = 0; i < conta; i++) {
@@ -77,6 +89,58 @@ public class ArchivioNomi {
                 System.out.println("Il nome "+a[i]+" si ripete "+ripete+" volte");
             }
             ripete=0;
+        }
+    }
+    private static String[] Modifica(String[] a, int conta, Scanner in) {
+        String mod;
+        String sostituto;
+            System.out.println("Inserisci il nome da modificare");
+            mod = in.next();
+            for (int i = 0; i < conta; i++) {
+                if (a[i].equalsIgnoreCase(mod)) {
+                    System.out.println("Inserisci il nuovo nome");
+                    sostituto = in.next();
+                    a[i] = sostituto;
+                    break;
+                }
+            }
+        return a;
+    }
+    private static void Visualizza(String[]a, int conta){
+        System.out.println("Ecco il tuo archivio:");
+        for(int i =0; i<conta;i++){
+            System.out.println(a[i]);
+        }
+    }
+    private static String Lungo(String [] a, int conta){
+        String lungo ="";
+        for(int i=0;i<conta;i++){
+            if(a[i].length()>lungo.length()){
+                lungo = a[i];
+            }
+        }
+        return lungo;
+    }
+    private static String Corto(String [] a, int conta){
+        String corto =a[0];
+        for(int i =1;i<conta;i++){
+            if(a[i].length()<corto.length()){
+                corto = a[i];
+            }
+        }
+        return corto;
+    }
+    private static void CancellaTutto(String[] a, int conta, Scanner in){
+        String cancella;
+        System.out.println("Inserisci il nome da cancellare");
+        cancella = in.next();
+        for(int i=0;i<conta;i++){
+            if(a[i].equalsIgnoreCase(cancella)){
+                for(int j =i;i<conta-1;j++){
+                    a[j] = a[j+1];
+                }
+                conta = conta-1;
+            }
         }
     }
 }
