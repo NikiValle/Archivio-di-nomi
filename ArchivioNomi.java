@@ -21,13 +21,17 @@ public class ArchivioNomi {
             scelta = in.nextInt();
             switch (scelta) {
                 case 1:
-                    Aggiunta(strings, conta, in);
+                    System.out.println("Inserisci il nome");
+                    String aggiungi = in.next();
+                    Aggiunta(strings, conta, aggiungi);
                     break;
                 case 2:
                     Cancella(strings, conta);
                     break;
                 case 3:
-                    if(Ricerca(strings, conta, in)){
+                    System.out.println("Inserisci un nome");
+                    String cerca = in.next();
+                    if(Ricerca(strings, conta, cerca)){
                         System.out.println("Il nome è presente");
                     }
                     else{
@@ -38,7 +42,11 @@ public class ArchivioNomi {
                     Duplicati(strings, conta);
                     break;
                 case 5:
-                    Modifica(strings, conta, in);
+                    System.out.println("Inserisci il nome da modificare");
+                    String mod = in.next();
+                    System.out.println("Inserisci il nuovo nome");
+                    String sostituto = in.next();
+                    Modifica(strings, conta, mod, sostituto);
                     break;
                 case 6:
                     Visualizza(strings, conta);
@@ -48,14 +56,16 @@ public class ArchivioNomi {
                     Corto(strings, conta);
                     break;
                 case 8:
-                    CancellaTutto(strings, conta, in);
+                    String cancella;
+                    System.out.println("Inserisci il nome da cancellare");
+                    cancella = in.next();
+                    CancellaTutto(strings, conta, cancella);
                     break;
             }
         } while (scelta != 0);
     }
-    private static void Aggiunta (String [] a, int conta, Scanner in){
-        System.out.println("Inserisci il nome");
-        a[conta] = in.next();
+    private static void Aggiunta (String [] a, int conta, String aggiungi){
+        a[conta] = aggiungi;
         conta = conta+1;
     }
     private static void Cancella (String [] a, int conta){
@@ -64,11 +74,8 @@ public class ArchivioNomi {
         }
         conta = conta - 1;
     }
-    private static boolean Ricerca(String[] a, int conta, Scanner in){
-        String cerca;
+    private static boolean Ricerca(String[] a, int conta, String cerca){
         boolean trovato =false;
-        System.out.println("Inserisci un nome");
-        cerca = in.next();
         for(int i =0;i<conta;i++){
             if(a[i].equalsIgnoreCase(cerca)){
                 trovato = true;
@@ -91,19 +98,13 @@ public class ArchivioNomi {
             ripete=0;
         }
     }
-    private static String[] Modifica(String[] a, int conta, Scanner in) {
-        String mod;
-        String sostituto;
-            System.out.println("Inserisci il nome da modificare");
-            mod = in.next();
-            for (int i = 0; i < conta; i++) {
-                if (a[i].equalsIgnoreCase(mod)) {
-                    System.out.println("Inserisci il nuovo nome");
-                    sostituto = in.next();
-                    a[i] = sostituto;
-                    break;
-                }
+    private static String[] Modifica(String[] a, int conta, String mod, String sostituto) {
+        for (int i = 0; i < conta; i++) {
+            if (a[i].equalsIgnoreCase(mod)) {
+                a[i] = sostituto;
+                break;
             }
+        }
         return a;
     }
     private static void Visualizza(String[]a, int conta){
@@ -130,10 +131,7 @@ public class ArchivioNomi {
         }
         return corto;
     }
-    private static void CancellaTutto(String[] a, int conta, Scanner in){
-        String cancella;
-        System.out.println("Inserisci il nome da cancellare");
-        cancella = in.next();
+    private static void CancellaTutto(String[] a, int conta, String cancella){
         for(int i=0;i<conta;i++){
             if(a[i].equalsIgnoreCase(cancella)){
                 for(int j =i;i<conta-1;j++){
